@@ -75,7 +75,10 @@
     background-color: var(--primary);
     color: #fff !important;
 }
-
+.PanelHeader__fixed {
+    z-index: 1000 !important;
+    background-color: var(--primary);
+}
 .PanelHeader-content,
 .PanelHeaderButton {
     color: #fff !important;
