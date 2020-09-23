@@ -1,7 +1,7 @@
 [<img width="134" src="https://vk.com/images/apps/mini_apps/vk_mini_apps_logo.svg">](https://vk.com/services)
 
 # Create VK Mini App [![npm][npm]][npm-url] [![deps][deps]][deps-url]
-
+#1
 ## How to install
 
 ### Create VK Mini App with gh-pages deploy
