@@ -206,7 +206,7 @@
 
 .diary__weekdays {
     position: absolute;
-    top: 12px;
+    top: 13px;
     width: calc(100% * 7 / 9);
     left: calc(100% / 9);
     z-index: 11;
@@ -264,7 +264,7 @@
 .diary__month::before {
     content: "";
     position: absolute;
-    bottom: 53px;
+    bottom: 52px;
     left: calc(100% / 9);
     width: calc(100% * 7 / 9);
     height: 200px;
@@ -299,7 +299,7 @@
 }
 
 .diary__month.diary__month_collapsed .datepicker {
-    top: calc(19px - var(--chosen-week) * 33.25px);
+    top: calc(20px - var(--chosen-week) * 33.25px);
 }
 .datepicker_no-animation .datepicker, .datepicker_no-animation .diary__weekday, .datepicker_no-animation .datepicker__day::before {
     transition: none !important;

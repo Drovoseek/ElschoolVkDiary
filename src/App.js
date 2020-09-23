@@ -4,6 +4,8 @@ import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar, PanelHeaderBut
 import "@vkontakte/vkui/dist/vkui.css";
 import Diary from "./panels/Diary";
 import "./styles.css";
+import Icon24Videocam from "@vkontakte/icons/dist/24/videocam";
+
 
 class App extends React.Component {
     constructor(props) {
@@ -22,17 +24,22 @@ class App extends React.Component {
                 <View id="app" activePanel={this.state.activePanel}>
                     <Panel id="home">
                         <PanelHeader
-                            left={
-                                <PanelHeaderButton
-                                    className="menu-button"
-                                    onClick={() => {
-                                        this.setState({ activePanel: "menu" });
-                                    }}
-                                >
-                                    <Avatar size={36} src="https://krot.info/uploads/posts/2019-10/1570183451_instagram-jelizabet-debiki-73.jpg" />
-                                </PanelHeaderButton>
-                            }
                             separator={false}
+                            left={
+                                <React.Fragment>
+                                    <PanelHeaderButton
+                                        className="menu-button"
+                                        onClick={() => {
+                                            this.setState({ activePanel: "menu" });
+                                        }}
+                                    >
+                                        <Avatar size={36} src="https://krot.info/uploads/posts/2019-10/1570183451_instagram-jelizabet-debiki-73.jpg" />
+                                    </PanelHeaderButton>
+                                    <PanelHeaderButton>
+                                        <Icon24Videocam />
+                                    </PanelHeaderButton>
+                                </React.Fragment>
+                            }
                         ></PanelHeader>
                         <Diary />
                     </Panel>
