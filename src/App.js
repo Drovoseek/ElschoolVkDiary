@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import bridge from "@vkontakte/vk-bridge";
-import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar } from "@vkontakte/vkui";
+import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar, PanelHeaderButton } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 import Diary from "./panels/Diary";
 import "./styles.css";
@@ -23,13 +23,14 @@ class App extends React.Component {
                     <Panel id="home">
                         <PanelHeader
                             left={
-                                <Avatar
-                                    size={36}
-                                    src="https://krot.info/uploads/posts/2019-10/1570183451_instagram-jelizabet-debiki-73.jpg"
+                                <PanelHeaderButton
+                                    className="menu-button"
                                     onClick={() => {
                                         this.setState({ activePanel: "menu" });
                                     }}
-                                />
+                                >
+                                    <Avatar size={36} src="https://krot.info/uploads/posts/2019-10/1570183451_instagram-jelizabet-debiki-73.jpg" />
+                                </PanelHeaderButton>
                             }
                             separator={false}
                         >

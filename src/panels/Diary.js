@@ -211,7 +211,7 @@ class Home extends React.Component {
                 </div>
                 <div className="diary__block-wrapper">
                     <div className="diary__block">
-                        <div className="diary__month-wrapper">
+                        <div className={"diary__month-wrapper" + (this.state.animateDatepicker ? "" : " datepicker_no-animation")}>
                             <div className={"diary__month" + (this.state.showndatepicker ? "" : " diary__month_collapsed")}>
                                 <div className="d-flex diary__weekdays">
                                     {[{ id: 1, name: "ПН" }, { id: 2, name: "ВТ" }, { id: 3, name: "СР" }, { id: 4, name: "ЧТ" }, { id: 5, name: "ПТ" }, { id: 6, name: "СБ" }, { id: 0, name: "ВС" }].map((day, key) => (
@@ -283,7 +283,7 @@ class Home extends React.Component {
                                 </Button>
 
                                 <div
-                                    className={"diary__datepicker datepicker d-flex flex-wrap" + (this.state.animateDatepicker ? "" : " datepicker_no-animation")}
+                                    className="diary__datepicker datepicker d-flex flex-wrap"
                                     style={{
                                         "--chosen-week": `calc(${this.state.chosenWeek - 1})`
                                     }}
