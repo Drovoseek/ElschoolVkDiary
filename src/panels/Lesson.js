@@ -1,6 +1,5 @@
 import React from "react";
 import Icon24Videocam from "@vkontakte/icons/dist/24/videocam";
-import { string } from "prop-types";
 
 class DiaryLesson extends React.Component {
     constructor(props) {
@@ -40,20 +39,20 @@ class DiaryLesson extends React.Component {
     }
 
     formatStages = stages => {
-        var string = [];
-        string.push(<span>{stages.substring(0, stages.indexOf('"materials_json_format'))}</span>);
+        var stagesText = [];
+        stagesText.push(<span>{stages.substring(0, stages.indexOf('"materials_json_format'))}</span>);
         stages = stages.substring(stages.indexOf('"materials_json_format":[') + 26, stages.length - 2);
         stages = stages.split("},{");
         stages.map(stage => {
             var text = stage.substring(8, stage.indexOf('","link"'));
             var url = stage.substring(stage.indexOf('"link"') + 8, stage.length - 1);
-            string.push(
+            stagesText.push(
                 <div>
                     {text}: <a href={url}>{url}</a>
                 </div>
             );
         });
-        return string;
+        return stagesText;
     };
 
     render() {

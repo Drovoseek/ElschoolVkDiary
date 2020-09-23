@@ -33,9 +33,7 @@ class App extends React.Component {
                                 </PanelHeaderButton>
                             }
                             separator={false}
-                        >
-                            Дневник
-                        </PanelHeader>
+                        ></PanelHeader>
                         <Diary />
                     </Panel>
                     <Panel id="menu">
