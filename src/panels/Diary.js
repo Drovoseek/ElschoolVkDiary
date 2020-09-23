@@ -37,7 +37,7 @@ class Home extends React.Component {
                     lessons: [
                         {
                             id: 1,
-                            title: "Математика версия 1.0.2",
+                            title: "Математика версия 1.0.3",
                             start: "08:00",
                             end: "08:40",
                             number: 1,
