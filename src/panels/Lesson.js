@@ -40,14 +40,14 @@ class DiaryLesson extends React.Component {
 
     formatStages = stages => {
         var stagesText = [];
-        stagesText.push(<span>{stages.substring(0, stages.indexOf('"materials_json_format'))}</span>);
+        stagesText.push(<span key={0}>{stages.substring(0, stages.indexOf('"materials_json_format'))}</span>);
         stages = stages.substring(stages.indexOf('"materials_json_format":[') + 26, stages.length - 2);
         stages = stages.split("},{");
         stages.map(stage => {
             var text = stage.substring(8, stage.indexOf('","link"'));
             var url = stage.substring(stage.indexOf('"link"') + 8, stage.length - 1);
             stagesText.push(
-                <div>
+                <div key={i}>
                     {text}: <a href={url}>{url}</a>
                 </div>
             );
