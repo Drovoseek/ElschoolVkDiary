@@ -4,7 +4,6 @@ import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar, PanelHeaderBut
 import "@vkontakte/vkui/dist/vkui.css";
 import Diary from "./panels/Diary";
 import "./styles.css";
-import Icon24Videocam from "@vkontakte/icons/dist/24/videocam";
 
 class App extends React.Component {
     constructor(props) {
