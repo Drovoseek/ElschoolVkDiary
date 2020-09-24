@@ -80,7 +80,6 @@
     background-color: var(--primary);
 }
 .PanelHeader-content,
-.PanelHeader__content,
 .PanelHeaderButton {
     color: #fff !important;
 }
@@ -305,9 +304,7 @@
 .diary__month.diary__month_collapsed .datepicker {
     top: calc(20px - var(--chosen-week) * 33.25px);
 }
-.datepicker_no-animation .datepicker,
-.datepicker_no-animation .diary__weekday,
-.datepicker_no-animation .datepicker__day::before {
+.datepicker_no-animation .datepicker, .datepicker_no-animation .diary__weekday, .datepicker_no-animation .datepicker__day::before {
     transition: none !important;
 }
 .datepicker__day {
@@ -389,7 +386,7 @@
     color: #787878;
     opacity: 1;
     transform: translate(-50%, 0) scale(1);
-    transition: opacity var(--anim-dura) ease, transform var(--anim-dura) ease 0.1s;
+    transition: opacity var(--anim-dura) ease, transform var(--anim-dura) ease .1s;
 }
 .diary__datepicker-year {
     position: absolute;
@@ -398,9 +395,9 @@
     color: #787878;
     opacity: 1;
     transform: scale(1);
-    transition: opacity var(--anim-dura) ease, transform var(--anim-dura) ease 0.1s;
+    transition: opacity var(--anim-dura) ease, transform var(--anim-dura) ease .1s;
 }
-.diary__month.diary__month_collapsed .diary__datepicker-month {
+.diary__month.diary__month_collapsed .diary__datepicker-month{
     bottom: -100vh;
     opacity: 0;
     transform: translate(-50%, 0) scale(0);
@@ -599,7 +596,7 @@
     font-style: italic;
 }
 .lesson__stages > div::before {
-    content: counter(section) ". ";
+    content: counter(section) '. ';
     counter-increment: section;
 }
 
