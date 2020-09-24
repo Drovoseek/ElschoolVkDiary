@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import bridge from "@vkontakte/vk-bridge";
-import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar, PanelHeaderButton } from "@vkontakte/vkui";
+import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar, PanelHeaderButton, PanelHeaderContent } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 import Diary from "./panels/Diary";
 import "./styles.css";
@@ -11,19 +11,23 @@ class App extends React.Component {
         this.state = {
             activeView: "app",
             activePanel: "home",
-            token: ""
+            userId: "123",
+            userPicUrl: '',
         };
-        this.getToken();
+        this.getId();
     }
 
-    getToken = () => {
+    getId = () => {
         try {
-            bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "status" }).then((result) => {
-                console.log(result);
-                this.setState({ token: result.access_token });
-            }, (error) => {
-                console.log(error);
-            });
+            bridge.send("VKWebAppGetUserInfo").then(
+                result => {
+                    console.log(result);
+                    this.setState({ userId: result.id, userPicUrl: result.photo_200 });
+                },
+                error => {
+                    console.log(error);
+                }
+            );
         } catch (e) {
             console.log(e);
         }
@@ -47,11 +51,11 @@ class App extends React.Component {
                                         this.setState({ activePanel: "menu" });
                                     }}
                                 >
-                                    <Avatar size={36} src="https://krot.info/uploads/posts/2019-10/1570183451_instagram-jelizabet-debiki-73.jpg" />
+                                    <Avatar size={36} src={this.state.userPicUrl} />
                                 </PanelHeaderButton>
                             }
                         >
-                            {this.token}
+                            <PanelHeaderContent>userId:{this.state.userId}</PanelHeaderContent>
                         </PanelHeader>
                         <Diary />
                     </Panel>

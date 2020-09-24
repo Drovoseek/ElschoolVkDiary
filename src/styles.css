@@ -89,9 +89,6 @@
     height: 0 !important;
 }
 
-.Avatar__img {
-    border: 1px solid #aaa;
-}
 .Button[disabled] {
     opacity: 1 !important;
 }
@@ -268,7 +265,7 @@
 .diary__month::before {
     content: "";
     position: absolute;
-    bottom: 52px;
+    bottom: 53px;
     left: calc(100% / 9);
     width: calc(100% * 7 / 9);
     height: 200px;
@@ -303,7 +300,7 @@
 }
 
 .diary__month.diary__month_collapsed .datepicker {
-    top: calc(20px - var(--chosen-week) * 33.25px);
+    top: calc(19px - var(--chosen-week) * 33.25px);
 }
 .datepicker_no-animation .datepicker,
 .datepicker_no-animation .diary__weekday,
