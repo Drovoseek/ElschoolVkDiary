@@ -10,14 +10,20 @@ class App extends React.Component {
         super(props);
         this.state = {
             activeView: "app",
-            activePanel: "home"
+            activePanel: "home",
+            token: ""
         };
         this.getToken();
     }
 
     getToken = () => {
-        bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "status" });
-        console.log(bridge);
+        try {
+            bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "status" });
+            console.log(bridge);
+            this.setState({ token: bridge.data.access_token });
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     hideMenu = () => {
@@ -41,7 +47,9 @@ class App extends React.Component {
                                     <Avatar size={36} src="https://krot.info/uploads/posts/2019-10/1570183451_instagram-jelizabet-debiki-73.jpg" />
                                 </PanelHeaderButton>
                             }
-                        ></PanelHeader>
+                        >
+                            {token}
+                        </PanelHeader>
                         <Diary />
                     </Panel>
                     <Panel id="menu">
