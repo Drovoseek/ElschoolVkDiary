@@ -18,9 +18,12 @@ class App extends React.Component {
 
     getToken = () => {
         try {
-            bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "status" });
-            console.log(bridge);
-            this.setState({ token: bridge.data.access_token });
+            bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "status" }).then((result) => {
+                console.log(result);
+                this.setState({ token: result.data.access_token });
+            }, (error) => {
+                console.log(error);
+            });
         } catch (e) {
             console.log(e);
         }
@@ -48,7 +51,7 @@ class App extends React.Component {
                                 </PanelHeaderButton>
                             }
                         >
-                            {token}
+                            {this.token}
                         </PanelHeader>
                         <Diary />
                     </Panel>
