@@ -20,7 +20,7 @@ class App extends React.Component {
         try {
             bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "status" }).then((result) => {
                 console.log(result);
-                this.setState({ token: result.data.access_token });
+                this.setState({ token: result.access_token });
             }, (error) => {
                 console.log(error);
             });
