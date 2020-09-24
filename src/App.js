@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import bridge from "@vkontakte/vk-bridge";
+import bridge from "@vkontakte/vk-bridge";
 import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar, PanelHeaderButton } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 import Diary from "./panels/Diary";
@@ -12,10 +12,18 @@ class App extends React.Component {
             activeView: "app",
             activePanel: "home"
         };
+        this.getToken();
     }
+
+    getToken = () => {
+        bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "status" });
+        console.log(bridge);
+    };
+
     hideMenu = () => {
         this.setState({ activePanel: "home" });
     };
+
     render() {
         return (
             <Root activeView={this.state.activeView}>
