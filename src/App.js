@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import bridge from "@vkontakte/vk-bridge";
-import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar, PanelHeaderButton, PanelHeaderContent } from "@vkontakte/vkui";
+import { Root, View, Panel, PanelHeader, PanelHeaderBack, Avatar, PanelHeaderButton, FormLayout, Input, FormLayoutGroup, Button, FormStatus } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 import Diary from "./panels/Diary";
 import "./styles.css";
+import SettingsPage from "./panels/Settings";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeView: "app",
+            activeView: "logon",
             activePanel: "home",
-            userId: "123",
-            userPicUrl: '',
+            apiToken: null,
+            userPicUrl: ""
         };
-        this.getId();
+        this.getToken();
     }
 
-    getId = () => {
+    getToken = () => {
         try {
-            bridge.send("VKWebAppGetUserInfo").then(
+            bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "" }).then(
                 result => {
                     console.log(result);
-                    this.setState({ userId: result.id, userPicUrl: result.photo_200 });
+                    this.setState({ apiToken: result.access_token, userPicUrl: result.photo_200 });
                 },
                 error => {
                     console.log(error);
@@ -40,6 +41,27 @@ class App extends React.Component {
     render() {
         return (
             <Root activeView={this.state.activeView}>
+                <View id="logon" activePanel="logon_panel">
+                    <Panel id="logon_panel">
+                        <PanelHeader>Дневник</PanelHeader>
+                        <FormLayout>
+                            <FormLayoutGroup top="Логин">
+                                <Input placeholder="Введите логин" />
+                            </FormLayoutGroup>
+                            <FormLayoutGroup top="Пароль">
+                                <Input placeholder="Введите пароль" />
+                            </FormLayoutGroup>
+                            <FormLayoutGroup>
+                                <Button className="mx-auto d-block" onClick={() => {}}>
+                                    Войти
+                                </Button>
+                            </FormLayoutGroup>
+                            <FormStatus header="Неправильный логин или пароль" mode="error">
+                                Пожалуйста, введите верные логин и пароль.
+                            </FormStatus>
+                        </FormLayout>
+                    </Panel>
+                </View>
                 <View id="app" activePanel={this.state.activePanel}>
                     <Panel id="home">
                         <PanelHeader
@@ -54,14 +76,12 @@ class App extends React.Component {
                                     <Avatar size={36} src={this.state.userPicUrl} />
                                 </PanelHeaderButton>
                             }
-                        >
-                            <PanelHeaderContent>userId:{this.state.userId}</PanelHeaderContent>
-                        </PanelHeader>
+                        ></PanelHeader>
                         <Diary />
                     </Panel>
                     <Panel id="menu">
                         <PanelHeader left={<PanelHeaderBack onClick={this.hideMenu} />}>Настройки</PanelHeader>
-                        <div>123</div>
+                        <SettingsPage />
                     </Panel>
                 </View>
             </Root>
