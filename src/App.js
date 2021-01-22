@@ -13,7 +13,7 @@ class App extends React.Component {
             activeView: "logon",
             activePanel: "home",
             apiToken: null,
-            userPicUrl: ""
+            userPicUrl: "",
         };
         this.getToken();
     }
@@ -21,11 +21,19 @@ class App extends React.Component {
     getToken = () => {
         try {
             bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "" }).then(
-                result => {
+                (result) => {
                     console.log(result);
-                    this.setState({ apiToken: result.access_token, userPicUrl: result.photo_200 });
+                    this.setState({ userPicUrl: result.photo_200 });
+                    fetch("https://api.elschool.ru/vk/auth?token=" + result.access_token, {
+                        crossDomain: true,
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        withCredentials: false,
+                    }).then((apiResponse) => {
+                        console.log(apiResponse);
+                    });
                 },
-                error => {
+                (error) => {
                     console.log(error);
                 }
             );
@@ -60,6 +68,7 @@ class App extends React.Component {
                                 Пожалуйста, введите верные логин и пароль.
                             </FormStatus>
                         </FormLayout>
+                        <div>version 22.01.2021 15:10</div>
                     </Panel>
                 </View>
                 <View id="app" activePanel={this.state.activePanel}>
