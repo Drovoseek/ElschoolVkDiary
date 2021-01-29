@@ -26,8 +26,7 @@ class App extends React.Component {
                     this.setState({ userPicUrl: result.photo_200 });
                     fetch("https://api.elschool.ru/vk/auth?token=" + result.access_token, {
                         crossDomain: true,
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
+                        method: "GET",
                         withCredentials: false,
                     }).then((apiResponse) => {
                         console.log(apiResponse);
@@ -68,7 +67,7 @@ class App extends React.Component {
                                 Пожалуйста, введите верные логин и пароль.
                             </FormStatus>
                         </FormLayout>
-                        <div>version 22.01.2021 15:10</div>
+                        <div>version 29.01.2021 14:10</div>
                     </Panel>
                 </View>
                 <View id="app" activePanel={this.state.activePanel}>
