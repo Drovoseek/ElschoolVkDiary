@@ -22,14 +22,15 @@ class App extends React.Component {
         try {
             bridge.send("VKWebAppGetAuthToken", { app_id: 7475417, scope: "" }).then(
                 (result) => {
-                    console.log(result);
                     this.setState({ userPicUrl: result.photo_200 });
-                    fetch("https://api.elschool.ru/vk/auth?token=" + result.access_token, {
+                    fetch("https://api.elschool.ru/vk/auth?vktoken=" + result.access_token, {
                         crossDomain: true,
                         method: "GET",
                         withCredentials: false,
                     }).then((apiResponse) => {
-                        console.log(apiResponse);
+                        this.setState({
+                            // apiToken: apiResponse.
+                        });
                     });
                 },
                 (error) => {
