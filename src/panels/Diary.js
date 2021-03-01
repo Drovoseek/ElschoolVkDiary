@@ -17,7 +17,7 @@ class Home extends React.Component {
             month: this.getMonth(new Date()),
             lessons: [],
             lessonsLoading: true,
-            animateDatepicker: true
+            animateDatepicker: true,
         };
         this.getMonthString = this.getMonthString.bind(this);
         this.getYearString = this.getYearString.bind(this);
@@ -30,46 +30,19 @@ class Home extends React.Component {
     loadLessons = day => {
         var self = this;
         var _day = day;
-        setTimeout(function() {
+        fetch('https://api.elschool.ru/vk/diary?token=' + this.props.token + '&date=' + this.state.chosenDay.getFullYear() + '.' + (this.state.chosenDay.getMonth() + 1) + '.' + this.state.chosenDay.getDate(), {
+            crossDomain: true,
+            method: "GET",
+            withCredentials: false,
+        }).then(response => response.json())
+        .then((response) => {
             if (_day == self.state.chosenDay) {
                 self.setState({
                     lessonsLoading: false,
-                    lessons: [
-                        {
-                            id: 1,
-                            title: "Математика версия 08.12.2020",
-                            start: "08:00",
-                            end: "08:40",
-                            number: 1,
-                            room: "204",
-                            kind: "ДО-онлайн",
-                            videoconfTime: "08:15",
-                            stages: 'Tекст"materials_json_format":[{"desc":"задание1","link":"ссылка"},{"desc":"задание2","link":"ссылка2"}]',
-                            homework: "Выполнить задание 123\n456",
-                            yaklass: true,
-                            mark: null
-                        },
-                        {
-                            id: 2,
-                            title: "Всероссийский государственный всёобъемлющий урок",
-                            start: "08:45",
-                            end: "09:25",
-                            number: 2,
-                            room: "204",
-                            kind: "ДО-электронный кейс",
-                            videoconfTime: "08:15",
-                            stages: '"materials_json_format":[{"desc":"задание1","link":"https://youtu.be/kFz9afj8lu0"}]',
-                            homework: "123",
-                            yaklass: false,
-                            mark: "4/5"
-                        },
-                        { id: 3, title: "Физкультура", start: "09:35", end: "10:15", number: 3, room: "физ. зал", kind: "Очный", videoconfTime: null, stages: null, homework: null, yaklass: false, mark: null },
-                        { id: 4, title: "Физкультура", start: "10:20", end: "11:00", number: 4, room: "физ. зал", kind: "Очный", videoconfTime: null, stages: null, homework: null, yaklass: false, mark: "2" },
-                        { id: 5, title: "Физика", start: "11:05", end: "11:45", number: 5, room: "3", kind: "Очный", videoconfTime: null, stages: null, homework: null, yaklass: false, mark: "Н" }
-                    ]
+                    lessons: response,
                 });
             }
-        }, 500);
+        });
     };
 
     getWeek(_day) {
@@ -222,15 +195,15 @@ class Home extends React.Component {
                                                 this.state.showndatepicker
                                                     ? null
                                                     : () => {
-                                                          var _day = new Date(this.state.chosenDay);
-                                                          if (_day.getDay() != day.id) {
-                                                              this.setState({ animateDatepicker: false });
-                                                              this.chooseDay(new Date(_day.setDate(_day.getDate() + (day.id == 0 ? 7 : day.id) - (_day.getDay() == 0 ? 7 : _day.getDay()))));
-                                                          }
-                                                          setTimeout(() => {
-                                                              this.setState({ animateDatepicker: true });
-                                                          }, 250);
-                                                      }
+                                                        var _day = new Date(this.state.chosenDay);
+                                                        if (_day.getDay() != day.id) {
+                                                            this.setState({ animateDatepicker: false });
+                                                            this.chooseDay(new Date(_day.setDate(_day.getDate() + (day.id == 0 ? 7 : day.id) - (_day.getDay() == 0 ? 7 : _day.getDay()))));
+                                                        }
+                                                        setTimeout(() => {
+                                                            this.setState({ animateDatepicker: true });
+                                                        }, 250);
+                                                    }
                                             }
                                         >
                                             {day.name}

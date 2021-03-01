@@ -27,14 +27,17 @@ class App extends React.Component {
                         crossDomain: true,
                         method: "GET",
                         withCredentials: false,
-                    }).then((apiResponse) => {
+                    }).then(response => response.json())
+                    .then((apiResponse) => {
                         this.setState({
-                            // apiToken: apiResponse.
+                            apiToken: apiResponse.token,
+                            activeView: 'app',
                         });
+                        console.log(apiResponse.token);
                     });
                 },
                 (error) => {
-                    console.log(error);
+                    console.log('error: ' + error);
                 }
             );
         } catch (e) {
@@ -68,7 +71,7 @@ class App extends React.Component {
                                 Пожалуйста, введите верные логин и пароль.
                             </FormStatus>
                         </FormLayout>
-                        <div>version 29.01.2021 14:10</div>
+                        <div>version 01.03.2021 15:23</div>
                     </Panel>
                 </View>
                 <View id="app" activePanel={this.state.activePanel}>
@@ -86,7 +89,7 @@ class App extends React.Component {
                                 </PanelHeaderButton>
                             }
                         ></PanelHeader>
-                        <Diary />
+                        <Diary token={this.state.apiToken} />
                     </Panel>
                     <Panel id="menu">
                         <PanelHeader left={<PanelHeaderBack onClick={this.hideMenu} />}>Настройки</PanelHeader>
